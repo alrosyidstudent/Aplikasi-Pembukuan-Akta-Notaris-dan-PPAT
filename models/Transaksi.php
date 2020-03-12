@@ -47,7 +47,52 @@ class Transaksi extends \yii\db\ActiveRecord
 
 	}
 
+	/**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getNotaris()
+    {
+        return $this->hasOne(Notaris::className(), ['id' => 'notaris_id']);
+    }
+    
 
+	/**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAktaPPAT()
+    {
+        return $this->hasOne(AktaPpat::className(), ['id' => 'akta_ppat_id']);
+    }
+   
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAktaNotaris()
+    {
+        return $this->hasOne(AktaNotaris::className(), ['id' => 'akta_notaris_id']);
+    }
+    
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAktaBadan()
+    {
+        return $this->hasOne(AktaBadan::className(), ['id' => 'akta_badan_id']);
+    }
+
+    
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAkun()
+    {
+        return $this->hasOne(Akun::className(), ['id' => 'akun_id']);
+    }
+
+   
 
 }
 
