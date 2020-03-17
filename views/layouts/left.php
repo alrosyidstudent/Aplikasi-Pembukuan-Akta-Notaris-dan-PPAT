@@ -172,22 +172,27 @@ if (!Yii::$app->user->isGuest) {
                 [
                     "label" => "Keuangan",
                     "url" => "#",
-                    "icon" => "money",
-                    
+                    "icon" => "money",                  
                     "items" => [
-                        [
-                            "label" => "Laporan Keuangan",
-                            "url" => ["laporan-keuangan/"],
-
-                        ],
                         [
                             "label" => "Kelola Transaksi",
                             "url" => ["transaksi/"],
-                            
+                            "active" => (Yii::$app->controller->id == 'transaksi'),
+                            'visible' => (
+                                Yii::$app->user->identity->role == User::ROLE_NOTARIS or
+                                Yii::$app->user->identity->role == User::ROLE_CLIENT
+                            ),
+
                         ],
                         [
                             "label" => "Kelola Akun",
                             "url" => ["akun/"],
+                            
+                        ],
+                        [
+                            "label" => "Laporan Keuangan",
+                            "url" => ["laporan-keuangan/"],
+                            
                             
                         ],
                     ],
