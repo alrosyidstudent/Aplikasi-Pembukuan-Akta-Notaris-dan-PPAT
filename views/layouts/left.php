@@ -179,20 +179,26 @@ if (!Yii::$app->user->isGuest) {
                             "url" => ["transaksi/"],
                             "active" => (Yii::$app->controller->id == 'transaksi'),
                             'visible' => (
-                                Yii::$app->user->identity->role == User::ROLE_NOTARIS or
-                                Yii::$app->user->identity->role == User::ROLE_CLIENT
+                                Yii::$app->user->identity->role == User::ROLE_NOTARIS
                             ),
 
                         ],
                         [
-                            "label" => "Kelola Akun",
-                            "url" => ["akun/"],
+                            "label" => "Laporan Keuangan",
+                            "url" => ["laporan-keuangan/"],
+                             "active" => (Yii::$app->controller->id == 'laporan-keuangan'),
+                            'visible' => (
+                                Yii::$app->user->identity->role == User::ROLE_NOTARIS
+                            ),
                             
                         ],
                         [
-                            "label" => "Laporan Keuangan",
-                            "url" => ["laporan-keuangan/"],
-                            
+                            "label" => "Kelola Akun",
+                            "url" => ["akun/"],
+                            "active" => (Yii::$app->controller->id == 'akun'),
+                            'visible' => (
+                                Yii::$app->user->identity->role == User::ROLE_NOTARIS
+                            ),
                             
                         ],
                     ],
