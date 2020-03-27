@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use app\models\User;
-use app\model\transaksi;
+use app\models\transaksi;
 use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
 use kartik\widgets\Select2;
@@ -19,74 +19,178 @@ $this->params['breadcrubs'][] = $this->title;
  	<?php  ?>
  </div>
 	<p>
-        <?= Html::a('Transaksi Pengeluaran', ['create'], ['class' => 'btn btn-success']) ?>
+      <?= Html::a('Transaksi Pengeluaran', ['pengeluaran'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <div class="panel panel-primary">
-	<div class="panel-heading"></div>
+		<div class="panel-heading"></div>
 	
-	  <div class="x_panel">
-  		<div class="transaksi-form">
+	  		<div class="x_panel">
 
-  			<div class="col-sm-2">
-  				<div class="form-group field-nominal">
-  					<label class="control-label" for="nominal-transaksi">Nominal</label>
-  					<input class="form-control" type="text" name="transaksi[nominal]" id="nominal-transaksi" maxlength="70">
-  					<div class="help-block"></div>
-  				</div>
-  			</div>
+	  			<?= $this->render('_form', [
+            	'model' => $model,
+        		]) ?>
+			</div>
+	</div>
 
-  			<div class="col-sm-3">
-  				<label class="control-label" for="Kategori-pemasukan">Kategori Pemasukan</label>
-  				<select id="Kategori-pemasukan" class="form-control Select2-hidden-acceseible" name="transaksi[kategori-pemasukan]" >
-  					<option value>Pilih Kategori..</option>
-  					<option value="1">Pemasukan Terkait Akta</option>
-  					<option value="2">Pemasukan Tidak Terkait Akta</option>
-  				</select>	
-  			</div>
 
-  			<div class="col-sm-2">
-  				<label class="control-label" for="Kategori-akun">Kategori Akun</label>
-  				<select id="Kategori-akun" class="form-control Select2-hidden-acceseible" name="transaksi[kategori-pemasukan]" >
-  					<option value>Pilih Kategori..</option>
-  					<option value="1">Kas & Bank</option>
-  					<option value="2">Akun Piutang</option>
-  					<option value="3">Aktiva Lancar</option>
-  					<option value="4">Aktiva Tetap</option>
-  					<option value="5">Akun Hutang</option>
-  					<option value="6">Kewajiban Lancar Lainnya</option>
-  					<option value="7">Kewajiban Jangka Panjang</option>
-  					<option value="8">Beban</option>
-  					<option value="9">Pendapatan Lainnya</option>
-  					<option value="10">Beban Lainnya</option>
-  				</select>
-  		</div>
 
-  		<div class="col-sm-3">
-  			<label>Tanggal</label>
-  			<div id="transaksi-tanggal-kvdate" class="input-group  date">
-  				<span class="input-group-addon kv-date-calender" title="Pilih Tanggal">
-  					
-  					<i class="glyphicon glyphicon-calendar"></i>
-  					
-  				</span>
-  				<span class="input-group-addon kv-date-remove" title="Bersihkan Field">
 
-  					<i class="glyphicon glyphicon-remove"></i>
 
-  				</span>
-  				<input type="text" name="transaksi[tanggal]" class="form-control krajee-datepicker" id="transaksi-tanggal" placeholder="Pilih Tanggal" data-datepicker-source="transaksi-tanggal-kvdate" data-datepicker-type="2" data-krajee-kvdatepicker="kvDatepicker_535b3809">
-  			</div>
-  		</div>
 
-  		<div class="col-sm-2">
-  				<div class="form-group field-keterangan">
-  					<label class="control-label" for="keterangan-transaksi">Keterangan</label>
-  					<input class="form-control" type="text" name="transaksi[keterangan]" id="field-keterangan-transaksi" maxlength="70">
-  					<div class="help-block"></div>
-  				</div>
-  			</div>
-  </div>
-	
+	<div class="panel-heading"> List Pemasukan</div>	
+	<div class="x_panel">
+
+		<?php 
+
+		if (Yii::$app->user->identity->role == User::ROLE_NOTARIS) {
+        $gridColumns = [
+            /*[
+                'class' => 'kartik\grid\SerialColumn',
+                'contentOptions' => ['style' => 'width: 10px;'],
+            ],*/
+            [
+                'attribute' => 'nomor',
+                'vAlign' => 'left',
+                'contentOptions' => ['style' => 'width: 20px;'],
+            ],
+            [
+                'attribute' => 'Keterangan Biaya',
+                'vAlign' => 'left',
+                'contentOptions' => ['style' => 'width: 250px;'],
+            ],
+            [
+                'class' => '\kartik\grid\DataColumn',
+                'attribute' => 'Kategori Akun',
+                'contentOptions' => ['style' => 'width: 150px;'],
+                
+            ],
+
+            [
+                'attribute' => 'tanggal',
+                'contentOptions' => ['style' => 'width: 50px;'],
+                'format' => ['date', 'php:Y-m-d'],
+                'filterType' => '\kartik\widgets\DatePicker',
+                'filterWidgetOptions' => [
+                    'pluginOptions' => [
+                        'format' => 'yyyy-mm-dd',
+                        'weekStart' => '1',
+                        'language' => 'uk',
+                    ],
+                ],
+            ],
+            [
+                'class' => '\kartik\grid\DataColumn',
+                'attribute' => 'Nominal',
+                'contentOptions' => ['style' => 'width: 100px;'],
+                'pageSummary' => true,
+                
+            ],
+            
+            ['class' => 'yii\grid\ActionColumn',
+                'contentOptions' => ['style' => 'width: 100px;'],
+                'buttons' => [
+                    'proses' => function ($url, $model, $key) {
+                        return Html::a('<span class="fa fa-list-ul" aria-hidden="true"></span> ', ['akta-notaris-proses/create', 'akta_notaris_id' => $model->id]);
+                    },
+                    /*'pihak' => function ($url, $model, $key) {
+                        return Html::a('<span class="fa fa-user-o" aria-hidden="true"></span> ', ['akta-notaris/pihak', 'id' => $model->id]);
+                    },*/
+                ],
+                'template' => '{proses} {pihak} {update} {view}'
+            ],
+        ];
+    } else {
+        $gridColumns = [
+            /*[
+                'class' => 'kartik\grid\SerialColumn',
+                'contentOptions' => ['style' => 'width: 10px;'],
+            ],*/
+            [
+                'attribute' => 'nomor',
+                'vAlign' => 'left',
+                'contentOptions' => ['style' => 'width: 20px;'],
+            ],
+            [
+                'attribute' => 'nama',
+                'vAlign' => 'left',
+                'contentOptions' => ['style' => 'width: 250px;'],
+            ],
+            [
+                'class' => '\kartik\grid\DataColumn',
+                'attribute' => 'jenis',
+                'contentOptions' => ['style' => 'width: 150px;'],
+                'pageSummary' => true,
+                // 'filterType' => GridView::FILTER_SELECT2,
+                // 'filterWidgetOptions' => [
+                //     'pluginOptions' => [
+                //         'data' => $data_jenis,
+                //         'autoWidget' => true,
+                //         'autoclose' => true,
+                //     ]
+                // ],
+            ],
+
+            [
+                'attribute' => 'tanggal',
+                'contentOptions' => ['style' => 'width: 50px;'],
+                'format' => ['date', 'php:Y-m-d'],
+                'filterType' => '\kartik\widgets\DatePicker',
+                'filterWidgetOptions' => [
+                    'pluginOptions' => [
+                        'format' => 'yyyy-mm-dd',
+                        'weekStart' => '1',
+                        'language' => 'uk',
+                    ],
+                ],
+            ],
+
+            [
+                'attribute' => 'pic',
+                'vAlign' => 'left',
+                'format' => 'raw',
+                'contentOptions' => ['style' => 'width: 100px;'],
+              ],
+            ['class' => 'yii\grid\ActionColumn',
+                'contentOptions' => ['style' => 'width: 100px;'],
+                'buttons' => [
+                ],
+                'template' => '{view}'
+            ],
+        ];
+    }
+
+
+    // Pjax::begin();
+    // echo GridView::widget([
+    //     'id' => 'kv-grd-demo',
+    //     'dataProvider' => $dataProvider,
+    //     'filterModel' => $searchModel,
+    //     'columns' => $gridColumns,
+    //     'containerOptions' => ['style' => 'overflow: auto'], // only set when $responsive = false
+    //     'pjax' => true, // pjax is set to always true for this demo
+    //     'toolbar' => [
+    //     ],
+    //     'export' => [
+    //         'fontAwesome' => true
+    //     ],
+    //     'bordered' => false,
+    //     'striped' => true,
+    //     'condensed' => true,
+    //     'responsive' => true,
+    //     'hover' => true,
+
+    //     'showPageSummary' => false,
+    //     'panel' => [
+    //         'type' => GridView::TYPE_PRIMARY,
+    //     ],
+    //     'persistResize' => false,
+    //     'exportConfig' => false,
+    // ]);
+
+
+		 ?>
+
 </div>
+
 
