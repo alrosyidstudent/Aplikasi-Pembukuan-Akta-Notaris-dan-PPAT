@@ -9,7 +9,11 @@ class Transaksi extends \yii\db\ActiveRecord
 {
 
 	
-	public $transaksi
+	public $nominal;
+    public $kategori;
+    public $tanggal;
+    
+
 
 	public static function tableName()
 	
@@ -46,6 +50,16 @@ class Transaksi extends \yii\db\ActiveRecord
         ];
 
 	}
+
+    public function dataKategori(){
+        return[
+            1=>'Biaya Masuk Terkait Akta',
+            2=>'Biaya Masuk Tidak Terkait Akta'
+        ];
+
+    }
+
+
 
 	/**
      * @return \yii\db\ActiveQuery
