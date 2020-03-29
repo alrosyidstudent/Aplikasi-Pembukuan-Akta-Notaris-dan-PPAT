@@ -3,36 +3,39 @@
 namespace app\controllers;
 
 use Yii;
-use app\model\Transakasi;
+use app\models\Transaksi;
 use yii\web\Controller;
 use yii\data\Pagination;
+use yii\web\NotFoundHttpException;
 
 
 
-class AktaBadanJenisController extends Controller
+
+class TransaksiController extends Controller
 
 {
 
 	public function actionIndex()
-	{
+    {
+        $model = new Transaksi;
+        if($model->load(Yii::$app->request->post())&&$model->validate()){
+            echo"suksess";
+            die();
+        }
+         return $this->render('index',compact('model'));
+    }
 
-		 $query = Transaksi::find();
+    public function actionPengeluaran()
+    {
+        $model = new Transaksi;
+        if($model->load(Yii::$app->request->post())&&$model->validate()){
+            echo"suksess";
+            die();
+        }
+         return $this->render('pengeluaran',compact('model'));
+    }
 
-		 $pagination = new pagination([
-		 	'defaultPageSize' => 5,
-		 	'totalCount' => $query->count(),
-		 ]);
-
-		 $transaksi = $query->orderBy('kategori')
-		 ->offset($pagination->offset)
-		 ->limit($pagination->limit)
-		 ->all();
-
-		 return $this->render('index',[
-		 	'Transaksi' =>$transaksi,
-		 	'pagination' => $pagination,
-		 ]);
-}
+   
 
  
 }
