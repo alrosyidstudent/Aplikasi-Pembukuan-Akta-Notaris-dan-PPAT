@@ -4,14 +4,15 @@ namespace app\models;
 
 use Yii;
 use app\models\Transaksi;
+use yii\db\ActiveRecord;
 
 class Transaksi extends \yii\db\ActiveRecord
 {
 
 	
-	public $nominal;
-    public $kategori;
-    public $tanggal;
+	// public $nominal;
+ //    public $kategori;
+ //    public $tanggal;
     
 
 
@@ -26,11 +27,15 @@ class Transaksi extends \yii\db\ActiveRecord
 	{
 
 	return [
-            [['notaris_id', 'akta_ppat_id','akta_notaris_id','akta_badan_id','akun_id'], 'required'],
-            [['notaris_id', 'nominal','akun_id'], 'integer'],
-            [['tanggal'], 'safe'	],
-            [['kategori'], 'string', 'max' => 45],           
+            [['notaris_id', 'kategori_akun_id'], 'required'],
+            [['notaris_id', 'nominal','kategori_akun_id'], 'integer'],          
+            [['keterangan','jenis'], 'string', 'max' => 45],           
             [['notaris_id'], 'exist', 'skipOnError' => true, 'targetClass' => Notaris::className(), 'targetAttribute' => ['notaris_id' => 'id']],
+            [['akta_ppat_id'], 'exist', 'skipOnError' => true, 'targetClass' => AktaPpat::className(), 'targetAttribute' => ['akta_ppat_id' => 'id']],
+            [['akta_notaris_id'], 'exist', 'skipOnError' => true, 'targetClass' => AktaNotaris::className(), 'targetAttribute' => ['akta_notaris_id' => 'id']],
+            [['akta_badan_id'], 'exist', 'skipOnError' => true, 'targetClass' => AktaBadan::className(), 'targetAttribute' => ['akta_badan_id' => 'id']],
+            [['kategori_akun_id'], 'exist', 'skipOnError' => true, 'targetClass' => KategoriAkun::className(), 'targetAttribute' => ['kategori_akun_id' => 'id']],
+            [['tanggal'], 'safe'    ],
         ];
 	}
 
@@ -39,27 +44,39 @@ class Transaksi extends \yii\db\ActiveRecord
 	{
 		 return [
             'id' => 'ID',
-            'kategori' => 'Kategori',
+            'jenis' => 'Jenis Transaksi',
             'nominal' => 'Nominal',
             'tanggal' => 'Tanggal',
             'notaris_id' => 'Nama Notaris',
             'akta_ppat_id' => 'Akta PPAT',
             'akta_notaris_id' => 'Akta Notaris',
             'akta_badan_id' => 'Akta Badan',
-            'akun_id' => 'Akun',
+            'kategori_akun_id' => 'Kategori',
+            'register' => 'Register',
+            'keterangan'=>'Keterangan'
         ];
 
 	}
 
-    public function dataKategori(){
+    public function dataJenisTransaksi(){
         return[
-            1=>'Biaya Masuk Terkait Akta',
-            2=>'Biaya Masuk Tidak Terkait Akta'
+            1=>'Biaya Masuk',
+            2=>'Biaya Keluar'          
         ];
 
     }
 
+    public function labelJenis(){
 
+        if ($this->jenis==1) {
+            return 'Biaya Masuk';
+        }else if ($this->jenis==2) {
+            return 'Biaya Keluar';
+        }else{
+            return 'jenis tidak diketahui';
+        }
+
+    }
 
 	/**
      * @return \yii\db\ActiveQuery
@@ -97,17 +114,18 @@ class Transaksi extends \yii\db\ActiveRecord
     }
 
     
-
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAkun()
+    public function getKategoriAkun()
     {
-        return $this->hasOne(Akun::className(), ['id' => 'akun_id']);
+        return $this->hasOne(KategoriAkun::className(), ['id' => 'kategori_akun_id']);
     }
-
-   
-
+    public  function getKategori()
+    {
+        return $this->KategoriAkun->name;
+    }
+    
 }
 
  ?>
