@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Transaksi;
+use app\models\TransaksiSearch;
 use app\models\AktaBadan;
 use app\models\AktaPpat;
 use app\models\AktaNotaris;
@@ -69,10 +70,17 @@ class TransaksiController extends Controller
 
     public function actionIndex()
         {
-            $model = new Transaksi;
-            
-             return $this->render('index'
-         );
+        // $searchModel = new TransaksiSearch();
+        // $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+       
+        // return $this->render('index', [
+        //     'searchModel' => $searchModel,
+        //     //'dataProvider' => $dataProvider,
+        // ]);
+
+            $dataTransaksi = Transaksi::find()->all();
+         return $this->render('index',compact('dataTransaksi'));
         }
         
 
@@ -85,25 +93,13 @@ class TransaksiController extends Controller
          return $this->render('pengeluaran',compact('model'));
     }
 
-
-
-
-    // public function actionCreate()
-    // {
-    //     $model = new Transaksi;
-    //     if($model->load(Yii::$app->request->post())&&$model->validate()){
-    //          $model->save();
-    //          Yii::$app->session->setFlash('Success','Data berhasil Disimpan');
-
-    //     }
-    //      return $this->render('create',compact('model'));
-    // }
     
 
 
      public function actionCreate()
     {
         $model = new Transaksi();
+
         
         if ($model->load(Yii::$app->request->post())) {
             $model->register = $this->generateRegister("register");
