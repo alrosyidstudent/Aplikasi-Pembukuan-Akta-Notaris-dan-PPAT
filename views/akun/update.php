@@ -2,24 +2,20 @@
 
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
-/* @var $model app\models\AktaNotaris */
+/* @var $model app\models\Akun */
 
-
-$this->params['breadcrumbs'][] = ['label' => 'Transaski', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Update Akun: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Akuns', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="akun-update">
 
-    <h2>Tambah Transaksi</h2>
-    
+    <h1><?= Html::encode($this->title) ?></h1>
 
-    <div class="x_panel">
-
-        <?= $this->render('_form', [
-            'model' => $model,
-        ]) ?>
-    </div>
+    <?= $this->render('_form', [
+        'model' => $model,
+    ]) ?>
 
 </div>
