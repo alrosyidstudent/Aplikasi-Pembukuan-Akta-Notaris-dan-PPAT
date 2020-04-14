@@ -1,72 +1,61 @@
-<?php
+<?php 
 
 namespace app\controllers;
 
 use Yii;
 use app\models\Akun;
-use yii\data\ActiveDataProvider;
+use app\models\AktaBadan;
+use app\models\AktaPpat;
+use app\models\AktaNotaris;
+use app\models\KategoriAkun;
+use app\models\Notaris;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use yii\data\Pagination;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 
-/**
- * AkunController implements the CRUD actions for Akun model.
- */
 class AkunController extends Controller
+
 {
-    /**
-     * @inheritdoc
-     */
+
     public function behaviors()
+            {
+                return [
+                    'verbs' => [
+                        'class' => VerbFilter::className(),
+                        'actions' => [
+                            'delete' => ['POST'],
+                        ],
+                    ],
+                ];
+            }
+
+
+    public function actionModal()
+        {
+            return $this->render('modal');
+        }
+
+
+
+    public function actionModalt()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+        $model=new Akun();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                if (Yii::$app->request->isAjax) {
+                    // JSON response is expected in case of successful save
+                    Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                    return ['success' => true];
+                }
+                return $this->redirect(['index', 'id' => $model->id]);
+            }
+        }
 
-    /**
-     * Lists all Akun models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Akun::find(),
-        ]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single Akun model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new Akun model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Akun();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -74,18 +63,53 @@ class AkunController extends Controller
         }
     }
 
-    /**
-     * Updates an existing Akun model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
+
+    public function actionIndex()
+    {
+        $model = new Akun;
+         $dataAkun = Akun::find()
+            // ->where(['jenis'=>1])
+            ->all();
+         return $this->render('index',compact('dataAkun'));
+    }
+
+
+    public function actionCreate()
+    {
+        $model=new Akun();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->insert();
+            
+            return $this->redirect(['index','id'=>$model->id]);
+        }else{
+            return $this->render('create',['model'=>$model]);
+        }
+    }
+
+    // public function actionCreate()
+ //    {
+ //        $model = new Akun(); 
+ //        if ($model->load(Yii::$app->request->post())){
+
+ //            $model->insert();
+            
+ //            return $this->redirect(['index', 'id' => $model->id]);
+ //        } else {
+ //            return $this->render('create', [
+ //                'model' => $model,
+ //            ]);
+ //        }
+ //    }
+
+        
+    
+
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -93,32 +117,16 @@ class AkunController extends Controller
         }
     }
 
-    /**
-     * Deletes an existing Akun model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Akun model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Akun the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
-    {
-        if (($model = Akun::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+        {
+            if (($model = Akun::findOne($id)) !== null) {
+                return $model;
+            } else {
+                throw new NotFoundHttpException('The requested page does not exist.');
+            }
         }
-    }
+            
 }
+
+?>
