@@ -1,50 +1,65 @@
-<?php 
+<?php
 
 namespace app\models;
 
 use Yii;
 
-use yii\db\ActiveRecord;
-
-class Akun extends \yii\db\ActiveRecord{
-
-	public static function tableName()
-	
-	{
-		return 'akun';
-
-	}
-
-
-	public function rules()
+/**
+ * This is the model class for table "akun".
+ *
+ * @property integer $id
+ * @property string $nama
+ * @property integer $debit
+ * @property integer $kredit
+ * @property integer $notaris_id
+ * @property integer $kategori_akun_id
+ * @property string $ket
+ *
+ * @property Notaris $notaris
+ * @property KategoriAkun $kategoriAkun
+ */
+class Akun extends \yii\db\ActiveRecord
+{
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
     {
+        return 'akun';
+    }
 
-	return [
-            [['id','notaris_id','kategori_akun_id'], 'required'],
-            [['notaris_id', 'kredit','debit','kategori_akun_id'], 'integer'],             
-            [['nama'], 'string', 'max' => 45],  
-            [['ket'], 'string', 'max' => 200],         
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['nama', 'notaris_id', 'kategori_akun_id', 'ket'], 'required'],
+            [['debit', 'kredit', 'notaris_id', 'kategori_akun_id'], 'integer'],
+            [['nama'], 'string', 'max' => 45],
+            [['ket'], 'string', 'max' => 100],
             [['notaris_id'], 'exist', 'skipOnError' => true, 'targetClass' => Notaris::className(), 'targetAttribute' => ['notaris_id' => 'id']],
-            [['kategori_akun_id'], 'exist', 'skipOnError' => true, 'targetClass' => KategoriAkun::className(), 'targetAttribute' => ['kategori_akun_id' => 'id']]
+            [['kategori_akun_id'], 'exist', 'skipOnError' => true, 'targetClass' => KategoriAkun::className(), 'targetAttribute' => ['kategori_akun_id' => 'id']],
         ];
-	}
+    }
 
-
-	public function attributesLabels()
-	{
-		 return [
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
             'id' => 'ID',
             'nama' => 'Nama Akun',
             'debit' => 'Debit',
-            'kredit' => 'kredit',
-            'notaris_id' => 'Nama Notaris',
-            'kategori_akun_id' => 'Kategori Akun',
-            'ket'=>'Keterangan Akun'       
+            'kredit' => 'Kredit',
+            'notaris_id' => 'Notaris ID',
+            'kategori_akun_id' => 'Kategori Akun ID',
+            'ket' => 'Keterangan',
         ];
+    }
 
-	}
-
-/**
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getNotaris()
@@ -52,20 +67,11 @@ class Akun extends \yii\db\ActiveRecord{
         return $this->hasOne(Notaris::className(), ['id' => 'notaris_id']);
     }
 
-
-   /**
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getKategoriAkun()
     {
         return $this->hasOne(KategoriAkun::className(), ['id' => 'kategori_akun_id']);
     }
-    public  function getKategori()
-    {
-        return $this->KategoriAkun->name;
-    }
-	
-
 }
-
- ?>
