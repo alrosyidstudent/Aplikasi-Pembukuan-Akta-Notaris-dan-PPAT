@@ -203,6 +203,15 @@ if (!Yii::$app->user->isGuest) {
                         ],
                     ],
                 ],
+                [
+                    "label" => "Laporan Pencatatan Akta",
+                    "url" => ["laporan-pencatatan-akta/"],
+                    "icon" => "files-o",
+                    "active" => (Yii::$app->controller->id == 'laporan-pencatatan-akta'),
+                            'visible' => (
+                                Yii::$app->user->identity->role == User::ROLE_NOTARIS
+                            ),
+                ],
             ],
         ]
     );
