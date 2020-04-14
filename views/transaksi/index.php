@@ -1,63 +1,54 @@
-<?php 
+<?php
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
-use app\models\User;
-use app\models\transaksi;
-use yii\widgets\ActiveForm;
-use kartik\date\DatePicker;
-use kartik\widgets\Select2;
 
+/* @var $this yii\web\View */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
+$this->title = 'Transaksi Masuk';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="transaksi-index">
 
-$this->title='Transaksi Pemasukan';
-$this->params['breadcrubs'][] = $this->title;
- ?>
- <div class="transaksi">
- 	<h1><?= Html::encode($this->title) ?></h1>
- 	<?php  ?>
- </div>
-	<p>
-      <?= Html::a('Pengeluaran', ['pengeluaran'], ['class' => 'btn btn-success']) ?>
+    <h1><?= Html::encode($this->title) ?></h1>
 
-       <?= Html::a('Tambah Transaksi', ['create'], ['class' => 'btn btn-success']) ?>
-    
+    <p>
+        <?= Html::a('Tambah Transaksi', ['create'], ['class' => 'btn btn-primary']) ?>
+         <?= Html::a('Transaksi keluar', ['pengeluaran'], ['class' => 'btn btn-success']) ?>
     </p>
-    
-     
 
-<div class="panel panel-primary">
-    <div class="panel-heading">List Pemasukan</div>   
-      <div class="x_panel">
-    
-        <table class="table table-bordered table-hover">
-            <tr class="success">
-                <td>Tanggal</td>
-                <td>Jenis Transaksi</td>
-                <td>Nominal</td>
-                <td>Keterangan</td>
-                <td>Aksi</td>
 
-                
+    <div class="panel panel-primary">
+        <div class="panel-heading">List Pemasukan</div>   
+            <div class="x_panel">
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel'=>true,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
 
-            </tr>
-            <?php 
-            foreach ($dataTransaksi as $transaksi) {
-                # code...
-                ?>
-                <tr>
-                    <td><?=$transaksi->tanggal ?></td>
-                     <td><?=$transaksi->labelJenis() ?></td>
-                    <td><?=$transaksi->nominal ?></td>
-                    <td><?=$transaksi->keterangan ?></td>
-                </tr>
-            <?php 
-            }
-            ?>
+            
+  
+            'nominal',
+            'tanggal',
+            [
+            'header'=>'Keterangan',
+            'value'=>'keterangan',
+            'filter'=>Html::textInput('keterangan',null,['class'=>'form-control'])
+            ],  
 
-        </table>
+            // 'notaris_id',
+            // 'akta_ppat_id',
+            // 'akta_notaris_id',
+            // 'akta_badan_id',
+            // 'kategori_akun_id',
+            // 'register',
 
-    </div>
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
+</div>
+</div>
 </div>
 
