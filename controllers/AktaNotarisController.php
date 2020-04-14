@@ -40,6 +40,7 @@ class AktaNotarisController extends Controller
         return $this->render('modal');
     }
 
+
     public function actionModalt()
     {
         $model=new AktaNotaris();
@@ -293,7 +294,7 @@ class AktaNotarisController extends Controller
     public function actionCreate()
     {
         $model = new AktaNotaris();
-
+        
         if ($model->load(Yii::$app->request->post())) {
             $model->register = $this->generateRegister("register");
             $model->insert();

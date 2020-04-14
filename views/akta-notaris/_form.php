@@ -23,14 +23,14 @@ use kartik\widgets\Select2;
     <div class="row">
         <div class="col-sm-6">
             <?php
-            echo $form->field($model, 'akta_notaris_jenis_id')->widget(Select2::classname(), [
-                'data' => \app\models\AktaNotarisJenis::getOptions(),
-                'id' => 'akta-notaris-jenis-id',
-                'options' => ['placeholder' => 'Pilih..'],
-                'pluginOptions' => [
-                    'allowClear' => true
-                ],
-            ]);
+                echo $form->field($model, 'akta_notaris_jenis_id')->widget(Select2::classname(), [
+                    'data' => \app\models\AktaNotarisJenis::getOptions(),
+                    'id' => 'akta-notaris-jenis-id',
+                    'options' => ['placeholder' => 'Pilih..'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);
             ?>
         </div>
         <div class="col-sm-6">

@@ -13,7 +13,7 @@ $this->title = 'Kelola Akta Umum';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="akta-badan-index">
-
+    
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -110,7 +110,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'proses' => function ($url, $model, $key) {
                         return Html::a('<span class="fa fa-list-ul" aria-hidden="true"></span> ', ['akta-notaris-proses/create', 'akta_notaris_id' => $model->id]);
+
                     },
+
                     /*'pihak' => function ($url, $model, $key) {
                         return Html::a('<span class="fa fa-user-o" aria-hidden="true"></span> ', ['akta-notaris/pihak', 'id' => $model->id]);
                     },*/
@@ -176,7 +178,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{view}'
             ],
         ];
+        
     }
+
 
 
     Pjax::begin();
@@ -200,13 +204,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
         'showPageSummary' => false,
         'panel' => [
-            'type' => GridView::TYPE_PRIMARY,
+        'type' => GridView::TYPE_PRIMARY,
         ],
         'persistResize' => false,
         'exportConfig' => false,
     ]);
 
     ?>
+
+
     <?php Pjax::end(); ?></div>
 
 
