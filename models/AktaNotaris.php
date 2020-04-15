@@ -140,4 +140,15 @@ class AktaNotaris extends \yii\db\ActiveRecord
     {
         return $this->hasMany(AktaNotarisProses::className(), ['akta_notaris_id' => 'id']);
     }
+
+
+    public static function getOptions(){
+        $data=  static::find()
+            ->select(['id','nama'])
+            ->where(['notaris_id'=>Yii::$app->user->identity->notaris_id])
+            ->all();
+        $value=(count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'id','nama');
+
+        return $value;
+    }
 }

@@ -186,6 +186,18 @@ class AktaBadan extends \yii\db\ActiveRecord
         return $staff['nama'];
     }
 
+
+
+     public static function getOptions(){
+        $data=  static::find()
+            ->select(['id','nama'])
+            ->where(['notaris_id'=>Yii::$app->user->identity->notaris_id])
+            ->all();
+        $value=(count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'id','nama');
+
+        return $value;
+    }
+
     /*public function getKedudukan(){
         $kedudukan='';
         $a_prosess=AktaBadanJenisProses::find()

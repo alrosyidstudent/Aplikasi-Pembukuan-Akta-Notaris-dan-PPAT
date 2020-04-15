@@ -235,4 +235,15 @@ class AktaPpat extends \yii\db\ActiveRecord
     {
         return $this->hasMany(AktaPpatJenisProses::className(), ['id' => 'akta_ppat_jenis_proses_id'])->viaTable('akta_ppat_proses', ['akta_ppat_id' => 'id']);
     }
+
+
+     public static function getOptions(){
+        $data=  static::find()
+            ->select(['id','alamat'])
+            ->where(['notaris_id'=>Yii::$app->user->identity->notaris_id])
+            ->all();
+        $value=(count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'id','alamat');
+
+        return $value;
+    }
 }
