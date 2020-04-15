@@ -7,6 +7,7 @@ use kartik\widgets\DepDrop;
 use yii\helpers\Url;
 use kartik\date\DatePicker;
 use kartik\widgets\Select2;
+use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Transaksi */
@@ -18,8 +19,9 @@ use kartik\widgets\Select2;
     <?php $form = ActiveForm::begin(); 
     echo $form->field($model, "notaris_id")->hiddenInput(['value' => Yii::$app->user->identity->notaris_id])->label(false);
 
+    //$akta=\app\models\AktaNotaris::findOne($model->akta_notaris_id); 
     ?>
-
+    
     <?= $form->field($model,'jenis')->dropDownList($model->dataJenisTransaksi(),[
                 'class'=>'form-control','prompt'=>'pilih jenis..'
             ])?>
@@ -55,10 +57,45 @@ use kartik\widgets\Select2;
             ],
         ]);
     ?>
+
+
+    <?php
+        echo $form->field($model, 'akta_notaris_id')->widget(Select2::classname(), [
+            'data' => \app\models\AktaNotaris::getOptions(),
+            'id' => 'akta_notaris_id',
+            'options' => ['placeholder' => 'Pilih..'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]);
+    ?>
+
+
+    <?php
+        echo $form->field($model, 'akta_badan_id')->widget(Select2::classname(), [
+            'data' => \app\models\AktaBadan::getOptions(),
+            'id' => 'akta_badan_id',
+            'options' => ['placeholder' => 'Pilih..'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]);
+    ?>
     
 
+    <?php
+        echo $form->field($model, 'akta_ppat_id')->widget(Select2::classname(), [
+            'data' => \app\models\AktaPpat::getOptions(),
+            'id' => 'akta_ppat_id',
+            'options' => ['placeholder' => 'Pilih..'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]);
+    ?>
+
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Simpan' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Simpan' : 'Perbaharui', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
