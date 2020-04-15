@@ -36,6 +36,7 @@ class Akun extends \yii\db\ActiveRecord
         return [
             [['nama', 'notaris_id', 'kategori_akun_id', 'ket'], 'required'],
             [['debit', 'kredit', 'notaris_id', 'kategori_akun_id'], 'integer'],
+            [['tanggal'], 'safe'],
             [['nama'], 'string', 'max' => 45],
             [['ket'], 'string', 'max' => 100],
             [['notaris_id'], 'exist', 'skipOnError' => true, 'targetClass' => Notaris::className(), 'targetAttribute' => ['notaris_id' => 'id']],
@@ -53,8 +54,9 @@ class Akun extends \yii\db\ActiveRecord
             'nama' => 'Nama Akun',
             'debit' => 'Debit',
             'kredit' => 'Kredit',
-            'notaris_id' => 'Notaris ID',
-            'kategori_akun_id' => 'Kategori Akun ID',
+            'tanggal' => 'Tanggal',
+            'notaris_id' => 'Notaris',
+            'kategori_akun_id' => 'Kategori Akun',
             'ket' => 'Keterangan',
         ];
     }
