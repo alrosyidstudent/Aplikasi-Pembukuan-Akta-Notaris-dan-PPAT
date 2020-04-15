@@ -26,6 +26,23 @@ use kartik\widgets\Select2;
     <?= $form->field($model, 'kredit')->textInput() ?>
 
     <?php
+        echo '<label>Tanggal</label>';
+        echo DatePicker::widget([
+            'model' => $model,
+            'attribute' => 'tanggal',
+            'name' => 'tanggal',
+            'value' => date('Y-m-d', strtotime('+30 days')),
+            'options' => ['placeholder' => 'Pilih tanggal'],
+            'pluginOptions' => [
+                'format' => 'yyyy-mm-dd',
+                'autoclose' => true,
+                'todayHighlight' => true
+            ]
+        ]);
+    ?>
+    
+
+    <?php
         echo $form->field($model, 'kategori_akun_id')->widget(Select2::classname(), [
             'data' => \app\models\KategoriAkun::getOptions(),
             'id' => 'kategori_akun_id',
@@ -39,7 +56,7 @@ use kartik\widgets\Select2;
     <?= $form->field($model, 'ket')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Simpan' : 'Perbaharui', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
