@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Perbaharui', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Hapus', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Anda yakin ingin menghapus transaksi ini?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -33,7 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'nominal',
             'tanggal',
             'keterangan',
-            'kategori_akun_id',
+            'kategoriAkun.name',
+            'aktaNotaris.nama',
+            'aktaBadan.nama',
+            'aktaPpat.alamat',
             
         ],
     ]) ?>
