@@ -36,20 +36,73 @@ class LabaRugiController extends Controller
      */
     public function actionIndex()
     {
+        // $tgl1 = $this->LabaRugi($tanggal);
+        // $tgl2 = $this->LabaRugi($tanggal2);
+
+        // $model =$this->findModel($tanggal);
+        // $model =$this->findModel($tanggal2);
+
+
+        $tgl1=Yii::$app->request->post('LabaRugi')['tanggalawal'];
+        $tgl2=Yii::$app->request->post('LabaRugi')['tanggalakhir']; 
+    
+            // $tgl1 = '2020-04-09';
+            // $tgl2 = '2020-04-10';     
+
+        
+    if ($tgl1==null&&$tgl2==null) {
         $model = new LabaRugi;
-        $dataPendapatan = LabaRugi::find()
+        $dataPendapatan = LabaRugi::find()        
         ->where(['jenis'=>1])
+        ->andwhere(['between','tanggal', '000-00-00', '000-00-00'])
         ->all();
+    }else{  
+        $model = new LabaRugi;
+        $dataPendapatan = LabaRugi::find() 
+        ->where(['jenis'=>1])
+        ->andwhere(['between','tanggal', $tgl1, $tgl2])
+        ->all();
+    }
+
+    if ($tgl1==null&&$tgl2==null) {
         $dataBiayaOperasional = LabaRugi::find()
         ->where(['kategori_akun_id'=>43])
+        ->andwhere(['between','tanggal', '000-00-00', '000-00-00'])
         ->all();
+    }else{
+        $dataBiayaOperasional = LabaRugi::find()
+        ->where(['kategori_akun_id'=>43])
+        ->andwhere(['between','tanggal', $tgl1, $tgl2])
+        ->all();
+    }
+
+    if ($tgl1==null&&$tgl2==null) {
         $dataBiayaLainnya = LabaRugi::find()
         ->where(['kategori_akun_id'=>45])
+        ->andwhere(['between','tanggal', '000-00-00', '000-00-00'])
+        // ->andwhere(['between','tanggal', $tgl1, $tgl2])
         ->all();
+    }else{
+        $dataBiayaLainnya = LabaRugi::find()
+        ->where(['kategori_akun_id'=>45])
+        ->andwhere(['between','tanggal', $tgl1, $tgl2])
+        ->all();
+    }
+
+    if ($tgl1==null&&$tgl2==null) {
         $dataPendapatanLainnya = LabaRugi::find()
         ->where(['kategori_akun_id'=>44])
+        ->andwhere(['between','tanggal', '000-00-00', '000-00-00'])
+        // ->andwhere(['between','tanggal', $tgl1, $tgl2])
         ->all();
-         return $this->render('index',compact('dataPendapatan','dataBiayaOperasional','dataBiayaLainnya','dataPendapatanLainnya'));
+    }else{
+        $dataPendapatanLainnya = LabaRugi::find()
+        ->where(['kategori_akun_id'=>44])
+        ->andwhere(['between','tanggal', $tgl1, $tgl2])
+        ->all();
+    }
+
+         return $this->render('index',compact('dataPendapatan','dataBiayaOperasional','dataBiayaLainnya','dataPendapatanLainnya','model','tgl1','tgl2'));
     }
 
     protected function findModel($id)
