@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use yii\widgets\Pjax;
+use kartik\date\DatePicker;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -22,24 +23,33 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="panel panel-primary">
         <div class="panel-heading">List Pengeluaran</div>   
             <div class="x_panel">
-    <?= GridView::widget([
+    <?php Pjax::begin(); ?>   
+ <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'nominal',
-            'tanggal',
+            [
+                'attribute' =>'tanggal',
+                'filter'=>DatePicker::widget([
+                        'model' => $searchModel,
+                        'attribute' => 'tanggal',
+                        'options' => ['placeholder' => 'Pilih tanggal'],
+                        'pluginOptions' => [
+                            'format' => 'yyyy-mm-dd',
+                            'autoclose' => true,
+                            'todayHighlight' => true
+                        ]
+                    ])
+            ],
             'keterangan',
-            // 'notaris_id',
-            // 'akta_ppat_id',
-            // 'akta_notaris_id',
-            // 'akta_badan_id',
-            // 'kategori_akun_id',
-            // 'register',
-
+            
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+<?php Pjax::end(); ?>
 </div>
 </div>
 </div>

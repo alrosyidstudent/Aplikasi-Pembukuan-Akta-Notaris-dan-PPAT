@@ -26,6 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
         <?= Html::a('Tambah Pihak', ['akta-ppat-pihak/create', 'akta_ppat_id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Update Proses', ['akta-ppat-proses/create', 'akta_ppat_id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Biaya Masuk/Keluar', ['transaksi/createaktappat','akta_ppat_id' => $model->id], ['class' => 'btn btn-primary'])?>
+
     </p>
 
     <div class="row">

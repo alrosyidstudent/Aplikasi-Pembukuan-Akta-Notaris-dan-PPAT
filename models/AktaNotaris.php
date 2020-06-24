@@ -65,7 +65,7 @@ class AktaNotaris extends \yii\db\ActiveRecord
             'notaris_id' => 'Notaris ID',
             'nomor' => 'Nomor',
             'tanggal' => 'Tanggal',
-            'nama' => 'Nama',
+            'nama' => 'Akta Umum',
             'akta_notaris_jenis_id' => 'Jenis Akta',
             'register' => 'Register',
             'corporate_client_id' => 'Client',

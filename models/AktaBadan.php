@@ -77,7 +77,7 @@ class AktaBadan extends \yii\db\ActiveRecord
             'notaris_id' => 'Notaris ID',
             'nomor' => 'Nomor',
             'tanggal' => 'Tanggal',
-            'nama' => 'Nama',
+            'nama' => 'Akta Badan',
             'kelurahan_id' => 'Kelurahan',
             'alamat' => 'Alamat',
             'rt' => 'RT',

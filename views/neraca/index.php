@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
-        <?= Html::a('Kembali', ['laporan-keuangan/index'], ['class' => 'btn btn-danger']) ?>
+       
     </p>
 
 <div class="tanggal-form">
@@ -63,7 +63,8 @@ $this->params['breadcrumbs'][] = $this->title;
         
     </div>
   <?= Html::submitButton('Filter', ['class' => 'btn btn-primary']) ?>  
-   <button class="btn btn-warning" onclick="print('PDFtoPrint')">Cetak pdf</button>      
+   <button class="btn btn-warning" onclick="print('PDFtoPrint')">Cetak pdf</button>  
+    <?= Html::a('Kembali', ['laporan-keuangan/index'], ['class' => 'btn btn-danger']) ?>    
   
     
  <?php ActiveForm::end(); ?>

@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Akun;
-use app\models\AkunSearch;
+use app\models\KategoriAkun;
+use app\models\KategoriAkunSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AkunController implements the CRUD actions for Akun model.
+ * KategoriAkunController implements the CRUD actions for KategoriAkun model.
  */
-class AkunController extends Controller
+class KategoriAkunController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class AkunController extends Controller
     }
 
     /**
-     * Lists all Akun models.
+     * Lists all KategoriAkun models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AkunSearch();
+        $searchModel = new KategoriAkunSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,28 +45,28 @@ class AkunController extends Controller
     }
 
     /**
-     * Displays a single Akun model.
+     * Displays a single KategoriAkun model.
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+    // public function actionView($id)
+    // {
+    //     return $this->render('view', [
+    //         'model' => $this->findModel($id),
+    //     ]);
+    // }
 
     /**
-     * Creates a new Akun model.
+     * Creates a new KategoriAkun model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Akun();
+        $model = new KategoriAkun();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -74,37 +74,8 @@ class AkunController extends Controller
         }
     }
 
-    public function actionCreatekredit($nama,$kredit)
-    {
-        $model = new Akun();
-        $model->nama=$nama;
-        $model->kredit=$kredit;
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('createkredit', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    public function actionCreatedebit($nama,$debit)
-    {
-        $model = new Akun();
-        $model->nama=$nama;
-         $model->debit=$debit;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('createkredit', [
-                'model' => $model,
-            ]);
-        }
-    }
-
     /**
-     * Updates an existing Akun model.
+     * Updates an existing KategoriAkun model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -114,7 +85,7 @@ class AkunController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -123,7 +94,7 @@ class AkunController extends Controller
     }
 
     /**
-     * Deletes an existing Akun model.
+     * Deletes an existing KategoriAkun model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -136,15 +107,15 @@ class AkunController extends Controller
     }
 
     /**
-     * Finds the Akun model based on its primary key value.
+     * Finds the KategoriAkun model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Akun the loaded model
+     * @return KategoriAkun the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Akun::findOne($id)) !== null) {
+        if (($model = KategoriAkun::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

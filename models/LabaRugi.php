@@ -17,7 +17,6 @@ use Yii;
  * @property integer $akta_notaris_id
  * @property integer $akta_badan_id
  * @property integer $kategori_akun_id
- * @property string $register
  *
  * @property Notaris $notaris
  * @property AktaPpat $aktaPpat
@@ -25,10 +24,13 @@ use Yii;
  * @property AktaBadan $aktaBadan
  * @property KategoriAkun $kategoriAkun
  */
-class Transaksi extends \yii\db\ActiveRecord
+class LabaRugi extends \yii\db\ActiveRecord
 {
 
-   
+
+
+    public $tanggalawal;
+    public $tanggalakhir;
     /**
      * @inheritdoc
      */
@@ -68,35 +70,12 @@ class Transaksi extends \yii\db\ActiveRecord
             'tanggal' => 'Tanggal',
             'keterangan' => 'Keterangan',
             'notaris_id' => 'Notaris',
-            'akta_ppat_id' => 'Akta Ppat/alamat (Biaya Terkait Akta)',
-            'akta_notaris_id' => 'Akta Umum (Biaya Terkait Akta)',
-            'akta_badan_id' => 'Akta Badan (Biaya Terkait Akta)',
-            'kategori_akun_id' => 'Kategori Akun',
-            
+            'akta_ppat_id' => 'Akta Ppat ID',
+            'akta_notaris_id' => 'Akta Notaris ID',
+            'akta_badan_id' => 'Akta Badan ID',
+            'kategori_akun_id' => 'Kategori Akun ID',
         ];
     }
-
-
-    public function dataJenisTransaksi(){
-        return[
-            1=>'Biaya Masuk',
-            2=>'Biaya Keluar'          
-        ];
-
-    }
-
-    public function labelJenis(){
-
-        if ($this->jenis==1) {
-            return 'Biaya Masuk';
-        }else if ($this->jenis==2) {
-            return 'Biaya Keluar';
-        }else{
-            return 'jenis tidak diketahui';
-        }
-
-    }
-
 
     /**
      * @return \yii\db\ActiveQuery
@@ -113,10 +92,6 @@ class Transaksi extends \yii\db\ActiveRecord
     {
         return $this->hasOne(AktaPpat::className(), ['id' => 'akta_ppat_id']);
     }
-    public  function getAktaPpatAlamat()
-    {
-        return $this->Aktappat->alamat;
-    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -124,10 +99,6 @@ class Transaksi extends \yii\db\ActiveRecord
     public function getAktaNotaris()
     {
         return $this->hasOne(AktaNotaris::className(), ['id' => 'akta_notaris_id']);
-    }
-     public  function getAktaNotarisNama()
-    {
-        return $this->AktaNotaris->nama;
     }
 
     /**
@@ -137,10 +108,6 @@ class Transaksi extends \yii\db\ActiveRecord
     {
         return $this->hasOne(AktaBadan::className(), ['id' => 'akta_badan_id']);
     }
-    public  function getAktaBadanNama()
-    {
-        return $this->AktaBadan->nama;
-    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -148,9 +115,5 @@ class Transaksi extends \yii\db\ActiveRecord
     public function getKategoriAkun()
     {
         return $this->hasOne(KategoriAkun::className(), ['id' => 'kategori_akun_id']);
-    }
-     public  function getKategori()
-    {
-        return $this->KategoriAkun->name;
     }
 }

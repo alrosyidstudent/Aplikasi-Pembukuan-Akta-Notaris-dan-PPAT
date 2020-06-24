@@ -18,15 +18,15 @@ class LaporanKeuanganController extends Controller
 		 return $this->render('index');
  	}
 
- 	public function actionNeraca()
-	{
-		 return $this->render('neraca');
- 	}
+ // 	public function actionNeraca()
+	// {
+	// 	 return $this->render('neraca');
+ // 	}
 
- 	public function actionLabarugi()
-	{
-		 return $this->render('laba-rugi');
- 	}
+ // 	public function actionLabarugi()
+	// {
+	// 	 return $this->render('laba-rugi');
+ // 	}
 }
 
 ?>

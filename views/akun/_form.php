@@ -19,7 +19,16 @@ use kartik\widgets\Select2;
     echo $form->field($model, "notaris_id")->hiddenInput(['value' => Yii::$app->user->identity->notaris_id])->label(false);
     ?>
 
-    <?= $form->field($model, 'nama')->textInput(['maxlength' => true]) ?>
+    <?php  
+    // if(isset($model->nama)){
+    //      $form->field($model, "nama")->textInput(['value' => $model->nama['Ekuitas Modal']])->label(true);
+    // }else{
+    
+    //      $form->field($model, 'nama')->textInput(['maxlength' => true]);
+    // };
+    ?>
+    
+    <?= $form->field($model, 'nama')->textInput(['maxlength' => true])?>
 
     <?= $form->field($model, 'debit')->textInput() ?>
 
@@ -44,7 +53,7 @@ use kartik\widgets\Select2;
 
     <?php
         echo $form->field($model, 'kategori_akun_id')->widget(Select2::classname(), [
-            'data' => \app\models\KategoriAkun::getOptions(),
+            'data' => \app\models\KategoriAkun::getOptionsAkun(),
             'id' => 'kategori_akun_id',
             'options' => ['placeholder' => 'Pilih..'],
             'pluginOptions' => [

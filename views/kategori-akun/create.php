@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Akun */
+/* @var $model app\models\KategoriAkun */
 
-$this->title = 'Tambah Akun';
-$this->params['breadcrumbs'][] = ['label' => 'Akuns', 'url' => ['index']];
+$this->title = 'Tambah Kategori Akun';
+$this->params['breadcrumbs'][] = ['label' => 'Kategori Akuns', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="akun-create">
+<div class="kategori-akun-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

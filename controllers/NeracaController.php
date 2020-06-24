@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Neraca;
+use app\models\Depresiasi;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -80,7 +81,7 @@ class NeracaController extends Controller
         }
 
         if ($tgl1==null&&$tgl2==null) {
-         $dataHutang= Neraca::find()
+        $dataHutang= Neraca::find()
         ->where(['between','kategori_akun_id','38','40'])
         ->andwhere(['between','tanggal', '000-00-00', '000-00-00'])
         ->all();
@@ -91,7 +92,17 @@ class NeracaController extends Controller
         ->all();
         }
 
-         return $this->render('index',compact('dataAktivaLancar','dataAktivaTetap','dataEkuitas','dataHutang','model','tgl1','tgl2'));
+        if ($tgl1==null&&$tgl2==null) {
+        $dataDepresiasi= Depresiasi::find()
+        ->where(['id'=>0])
+        
+        ->all();
+        }else{
+        $dataDepresiasi= Depresiasi::find()
+        ->all();
+        }
+
+         return $this->render('index',compact('dataAktivaLancar','dataAktivaTetap','dataEkuitas','dataHutang','model','dataDepresiasi','tgl1','tgl2'));
     }
 
     

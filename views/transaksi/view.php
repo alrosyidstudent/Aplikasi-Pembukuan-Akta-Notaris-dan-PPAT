@@ -15,21 +15,24 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+        <?= Html::a('Halaman Pemasukan', ['transaksi/'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Halaman Pengeluaran', ['transaksi/pengeluaran'], ['class' => 'btn btn-success']) ?>
+        
         <?= Html::a('Perbaharui', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Hapus', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Anda yakin ingin menghapus transaksi ini?',
+                'confirm' => 'Anda yakin ingin menghapus transaksi ini ?',
                 'method' => 'post',
             ],
         ]) ?>
     </p>
 
-    <?= DetailView::widget([     
+    <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
 
-            'jenis',
+            
             'nominal',
             'tanggal',
             'keterangan',
@@ -37,7 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'aktaNotaris.nama',
             'aktaBadan.nama',
             'aktaPpat.alamat',
-            
         ],
     ]) ?>
 

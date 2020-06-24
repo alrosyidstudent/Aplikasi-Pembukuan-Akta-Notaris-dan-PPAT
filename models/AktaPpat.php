@@ -87,7 +87,7 @@ class AktaPpat extends \yii\db\ActiveRecord
             'nomor' => 'Nomor',
             'tanggal' => 'Tanggal',
             'akta_ppat_jenis_id' => 'Jenis Akta',
-            'alamat' => 'Alamat',
+            'alamat' => 'Akta PPAT (Alamat)',
             'rt' => 'RT',
             'rw' => 'RW',
             'dusun' => 'Dusun',

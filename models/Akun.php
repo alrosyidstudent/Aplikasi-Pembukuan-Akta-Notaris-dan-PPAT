@@ -76,4 +76,15 @@ class Akun extends \yii\db\ActiveRecord
     {
         return $this->hasOne(KategoriAkun::className(), ['id' => 'kategori_akun_id']);
     }
+
+     public static function getOptions(){
+        $data=  static::find()
+            ->select(['id','nama'])
+            // ->where(['notaris_id'=>Yii::$app->user->identity->notaris_id])
+            ->where(['kategori_akun_id'=>36])
+            ->all();
+        $value=(count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'id','nama');
+
+        return $value;
+    }
 }

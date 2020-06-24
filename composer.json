@@ -27,6 +27,7 @@
         "kartik-v/yii2-dialog": "^1.0",
         "kartik-v/yii2-export": "@dev",
         "kartik-v/yii2-widget-datepicker": "@dev",
+        "kartik-v/yii2-date-range": "dev-master",
         "yiisoft/yii2-jui": "^2.0",
         "wbraganca/yii2-dynamicform": "*",
         "yiidoc/yii2-redactor": "*",
@@ -41,6 +42,8 @@
         "rmrevin/yii2-fontawesome": "~2.17",
         "fxp/composer-asset-plugin": "^1.4",
         "kartik-v/yii2-money": "dev-master"
+       
+
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

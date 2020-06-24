@@ -2,15 +2,15 @@
 
 use yii\helpers\Html;
 
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Akun */
 
-$this->title = 'Update Akun: ' . $model->nama;
+$this->title = 'Tambah Akun';
 $this->params['breadcrumbs'][] = ['label' => 'Akuns', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="akun-update">
+<div class="akun-create-kredit">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

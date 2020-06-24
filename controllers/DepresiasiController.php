@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Transaksi;
-use app\models\TransaksiSearch;
+use app\models\Depresiasi;
+use app\models\DepresiasiSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TransaksiController implements the CRUD actions for Transaksi model.
+ * DepresiasiController implements the CRUD actions for Depresiasi model.
  */
-class TransaksiController extends Controller
+class DepresiasiController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,13 +30,13 @@ class TransaksiController extends Controller
     }
 
     /**
-     * Lists all Transaksi models.
+     * Lists all Depresiasi models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new TransaksiSearch();
-        $dataProvider = $searchModel->searchmasuk(Yii::$app->request->queryParams);
+        $searchModel = new DepresiasiSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -44,20 +44,8 @@ class TransaksiController extends Controller
         ]);
     }
 
-
-     public function actionPengeluaran()
-    {
-        $searchModel = new TransaksiSearch();
-        $dataProvider2 = $searchModel->searchkeluar(Yii::$app->request->queryParams);
-
-        return $this->render('pengeluaran', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider2,
-        ]);
-    }
-
     /**
-     * Displays a single Transaksi model.
+     * Displays a single Depresiasi model.
      * @param integer $id
      * @return mixed
      */
@@ -69,16 +57,14 @@ class TransaksiController extends Controller
     }
 
     /**
-     * Creates a new Transaksi model.
+     * Creates a new Depresiasi model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-   
-
-
     public function actionCreate()
     {
-        $model = new Transaksi();
+        $model = new Depresiasi();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -88,49 +74,8 @@ class TransaksiController extends Controller
         }
     }
 
-    public function actionCreateaktanotaris($akta_notaris_id)
-    {
-        $model = new Transaksi();
-        $model->akta_notaris_id=$akta_notaris_id;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('createaktanotaris', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-
-     public function actionCreateaktabadan($akta_badan_id)
-    {
-        $model = new Transaksi();
-        $model->akta_badan_id=$akta_badan_id;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('createaktabadan', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-
-    public function actionCreateaktappat($akta_ppat_id)
-    {
-        $model = new Transaksi();
-        $model->akta_ppat_id=$akta_ppat_id;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('createaktappat', [
-                'model' => $model,
-            ]);
-        }
-    }
-
     /**
-     * Updates an existing Transaksi model.
+     * Updates an existing Depresiasi model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -149,7 +94,7 @@ class TransaksiController extends Controller
     }
 
     /**
-     * Deletes an existing Transaksi model.
+     * Deletes an existing Depresiasi model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -162,15 +107,15 @@ class TransaksiController extends Controller
     }
 
     /**
-     * Finds the Transaksi model based on its primary key value.
+     * Finds the Depresiasi model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Transaksi the loaded model
+     * @return Depresiasi the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Transaksi::findOne($id)) !== null) {
+        if (($model = Depresiasi::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+       <?= Html::a('Biaya Masuk/Keluar', ['transaksi/createaktabadan','akta_badan_id' => $model->id], ['class' => 'btn btn-primary'])?>
     </p>
 
     <?= DetailView::widget([

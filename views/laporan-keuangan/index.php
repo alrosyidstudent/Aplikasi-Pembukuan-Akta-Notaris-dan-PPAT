@@ -23,7 +23,7 @@ $this->params['breadcrubs'][] = $this->title;
 	  				Laporan Neraca
 	  				</div>
 	  				<div class="col-sm-6" align="right">
-	  					<?= Html::a('Lihat Laporan', ['neraca'], ['class' => 'btn btn-success']) ?>
+	  					<?= Html::a('Lihat Laporan', ['neraca/index'], ['class' => 'btn btn-success']) ?>
 	  				</div>
 	  			</div>
 
@@ -32,7 +32,7 @@ $this->params['breadcrubs'][] = $this->title;
 	  				Laporan Laba Rugi
 	  				</div>
 	  				<div class="col-sm-6" align="right">
-	  					<?= Html::a('Lihat Laporan', ['labarugi'], ['class' => 'btn btn-success']) ?>
+	  					 <?= Html::a('Lihat Laporan', ['laba-rugi/index'], ['class' => 'btn btn-success']) ?>
 	  				</div>
 	  			</div>
 	  			
