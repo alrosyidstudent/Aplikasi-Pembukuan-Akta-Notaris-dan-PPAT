@@ -64,6 +64,14 @@ if (!Yii::$app->user->isGuest) {
                                 Yii::$app->user->identity->role == User::ROLE_NOTARIS
                             ),
                         ],
+                        [
+                            "label" => "Laporan Pencatatan Akta",
+                            "url" => ["akta-notaris/laporan"],
+                            "active" => (Yii::$app->controller->id == 'akta-notaris'),
+                            "visible" => (
+                                Yii::$app->user->identity->role == User::ROLE_NOTARIS
+                            ),
+                        ],
                     ],
 
                 ],
@@ -89,6 +97,14 @@ if (!Yii::$app->user->isGuest) {
                             "label" => "Kelola Jenis Akta",
                             "url" => ["akta-badan-jenis-sifat/"],
                             "active" => (Yii::$app->controller->id == 'akta-badan-jenis-sifat'),
+                            'visible' => (
+                                Yii::$app->user->identity->role == User::ROLE_NOTARIS
+                            ),
+                        ],
+                        [
+                            "label" => "Laporan Pencatatan Akta",
+                            "url" => ["akta-badan/laporan"],
+                            "active" => (Yii::$app->controller->id == 'akta-badan'),
                             'visible' => (
                                 Yii::$app->user->identity->role == User::ROLE_NOTARIS
                             ),
@@ -124,6 +140,14 @@ if (!Yii::$app->user->isGuest) {
                             "label" => "Kelola Jenis Akta",
                             "url" => ["akta-ppat-jenis/"],
                             "active" => (Yii::$app->controller->id == 'akta-ppat-jenis'),
+                            'visible' => (
+                                Yii::$app->user->identity->role == User::ROLE_NOTARIS
+                            ),
+                        ],
+                        [
+                            "label" => "Laporan Pencatatan Akta",
+                            "url" => ["akta-ppat/laporan"],
+                            "active" => (Yii::$app->controller->id == 'akta-ppat'),
                             'visible' => (
                                 Yii::$app->user->identity->role == User::ROLE_NOTARIS
                             ),
@@ -202,15 +226,6 @@ if (!Yii::$app->user->isGuest) {
                             
                         ],
                     ],
-                ],
-                [
-                    "label" => "Laporan Pencatatan Akta",
-                    "url" => ["laporan-pencatatan-akta/"],
-                    "icon" => "files-o",
-                    "active" => (Yii::$app->controller->id == 'laporan-pencatatan-akta'),
-                            'visible' => (
-                                Yii::$app->user->identity->role == User::ROLE_NOTARIS
-                            ),
                 ],
             ],
         ]

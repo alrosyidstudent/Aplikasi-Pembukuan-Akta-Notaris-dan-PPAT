@@ -246,4 +246,7 @@ class AktaPpat extends \yii\db\ActiveRecord
 
         return $value;
     }
+    public $tanggalawal;
+    public $tanggalakhir;
+
 }

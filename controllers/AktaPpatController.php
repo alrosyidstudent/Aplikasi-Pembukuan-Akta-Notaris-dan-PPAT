@@ -387,4 +387,23 @@ class AktaPpatController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionLaporan()
+    {
+        $tglawal = Yii::$app->request->post('akta-ppat')['tanggalawal'];
+        $tglakhir = Yii::$app->request->post('akta-ppat')['tanggalakhir'];
+
+        // $model = new AktaPpat();
+        if ($tglawal==null&&$tglakhir==null) {
+            $model = new AktaPpat;
+            $dataAktaPpat = AktaPpat::find()
+            ->where(['between','tanggal', '000-00-00', '000-00-00'])
+            ->all();
+        }else{  
+           $dataAktaPpat = AktaPpat::find()
+            ->where(['between','tanggal', $tglawal, $tglakhir])
+            ->all();
+        }
+        return $this->render('laporan', compact('model', 'dataAktaPpat'));
+    }
 }
