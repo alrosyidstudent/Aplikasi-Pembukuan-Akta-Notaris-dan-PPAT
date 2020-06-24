@@ -8,6 +8,7 @@ use app\models\AktaNotarisPihak;
 use Yii;
 use app\models\AktaNotaris;
 use app\models\AktaNotarisSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -369,5 +370,15 @@ class AktaNotarisController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    public function actionLaporan()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => AktaNotaris::find(),
+        ]);
+
+        return $this->render('laporan', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 }
