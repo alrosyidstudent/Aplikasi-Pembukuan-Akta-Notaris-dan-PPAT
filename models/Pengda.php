@@ -9,10 +9,10 @@ use Yii;
  *
  * @property integer $id
  * @property string $nama
- * @property integer $id_kab
+ * @property integer $kabupaten_id
  *
- * @property Kabupaten $idKab
- * @property PengdaLap[] $pengdaLaps
+ * @property JenisLap[] $jenisLaps
+ * @property Kabupaten $kabupaten
  */
 class Pengda extends \yii\db\ActiveRecord
 {
@@ -30,10 +30,10 @@ class Pengda extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'nama', 'id_kab'], 'required'],
-            [['id', 'id_kab'], 'integer'],
+            [['nama', 'kabupaten_id'], 'required'],
+            [['kabupaten_id'], 'integer'],
             [['nama'], 'string', 'max' => 100],
-            [['id_kab'], 'exist', 'skipOnError' => true, 'targetClass' => Kabupaten::className(), 'targetAttribute' => ['id_kab' => 'id']],
+            [['kabupaten_id'], 'exist', 'skipOnError' => true, 'targetClass' => Kabupaten::className(), 'targetAttribute' => ['kabupaten_id' => 'id']],
         ];
     }
 
@@ -45,23 +45,37 @@ class Pengda extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nama' => 'Nama',
-            'id_kab' => 'Id Kab',
+            'kabupaten_id' => 'Kabupaten',
+            'kabupatenName' => 'Kabupaten',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdKab()
+    public function getJenisLaps()
     {
-        return $this->hasOne(Kabupaten::className(), ['id' => 'id_kab']);
+        return $this->hasMany(JenisLap::className(), ['pengda_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPengdaLaps()
+    public function getKabupaten()
     {
-        return $this->hasMany(PengdaLap::className(), ['id_pengda' => 'id']);
+        return $this->hasOne(Kabupaten::className(), ['id' => 'kabupaten_id']);
+    }
+
+    public function getKabupatenName()
+    {
+        return $this->kabupaten->nama;
+    }
+
+    public static function getOptions()
+    {
+        $data=  static::find()->orderBy('nama')->all();
+        $value=(count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'id','kabupatenName');
+
+        return $value;
     }
 }

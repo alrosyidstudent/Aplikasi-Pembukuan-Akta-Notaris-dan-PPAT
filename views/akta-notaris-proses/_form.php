@@ -22,9 +22,19 @@ echo DetailView::widget([
     ],
 ]); ?>
 
-<div class="akta-notaris-proses-form">
+<div class="akta-notaris-proses-form">    
 
-    <?php $form = ActiveForm::begin();
+    <?php
+    // $prosess = \app\models\AktaNotarisJenisProses::find()
+    // ->select('id')
+    // ->where(['notaris_id' => Yii::$app->user->identity->notaris_id])
+    // ->asArray()->all();
+
+    // $data_proses[] = '';
+    // foreach ($prosess as $proses) {
+    //     $data_proses[] = $proses['id'];
+    // }
+    $form = ActiveForm::begin();
 
     echo $form->field($model, "akta_notaris_jenis_id")->hiddenInput(['value' => $akta->akta_notaris_jenis_id])->label(false);
     echo $form->field($model, "akta_notaris_id")->hiddenInput(['value' => $model->akta_notaris_id])->label(false);
@@ -37,7 +47,7 @@ echo DetailView::widget([
             'allowClear' => true
         ],
     ]);
-    ?>
+    ?> 
 
     <?= $form->field($model, 'keterangan')->textInput(['maxlength' => true]) ?>
 

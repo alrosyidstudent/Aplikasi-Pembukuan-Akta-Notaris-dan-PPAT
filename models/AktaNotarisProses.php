@@ -68,4 +68,13 @@ class AktaNotarisProses extends \yii\db\ActiveRecord
     {
         return $this->hasOne(AktaNotarisJenisProses::className(), ['id' => 'akta_notaris_jenis_proses_id']);
     }
+    public static function getOptions(){
+        $data=  static::find()
+            ->select(['id','deskripsi'])
+            ->where(['notaris_id'=>Yii::$app->user->identity->notaris_id])
+            ->all();
+        $value=(count($data)==0)? [''=>'']: \yii\helpers\ArrayHelper::map($data, 'id','deskripsi');
+
+        return $value;
+    }
 }

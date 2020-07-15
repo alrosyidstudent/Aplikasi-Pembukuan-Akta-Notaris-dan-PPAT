@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Pengda;
 use Yii;
 use app\models\Notaris;
 use app\models\NotarisSearch;

@@ -30,6 +30,14 @@ if (!Yii::$app->user->isGuest) {
                     ),
                 ],
                 [
+                    "label" => "Kelola Pengawas Daerah",
+                    "url" => ["pengda/"],
+                    "icon" => "user-secret",
+                    'visible' => (
+                        Yii::$app->user->identity->role == User::ROLE_SUPER
+                    ),
+                ],
+                [
                     "label" => "Akta Umum",
                     'icon' => 'user-secret',
                     "url" => "#",
@@ -155,6 +163,15 @@ if (!Yii::$app->user->isGuest) {
                     ],
                 ],
                 [
+                    "label" => "Kelola Jenis Laporan",
+                    "url" => ["jenis-lap/"],
+                    "icon" => "files-o",
+                    'visible' => (
+                        Yii::$app->user->identity->role == User::ROLE_SUPER
+                    ),
+                ],
+                
+                [
                     "label" => "Surat Bawah Tangan",
                     "url" => "#",
                     "icon" => "files-o",
@@ -207,7 +224,6 @@ if (!Yii::$app->user->isGuest) {
                             ),
 
                         ],
-                       
                         [
                             "label" => "Laporan Keuangan",
                             "url" => ["laporan-keuangan/"],

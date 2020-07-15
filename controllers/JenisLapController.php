@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Pengda;
-use app\models\PengdaSearch;
+use app\models\JenisLap;
+use app\models\JenisLapSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PengdaController implements the CRUD actions for Pengda model.
+ * JenisLapController implements the CRUD actions for JenisLap model.
  */
-class PengdaController extends Controller
+class JenisLapController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class PengdaController extends Controller
     }
 
     /**
-     * Lists all Pengda models.
+     * Lists all JenisLap models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PengdaSearch();
+        $searchModel = new JenisLapSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class PengdaController extends Controller
     }
 
     /**
-     * Displays a single Pengda model.
+     * Displays a single JenisLap model.
      * @param integer $id
      * @return mixed
      */
@@ -57,13 +57,13 @@ class PengdaController extends Controller
     }
 
     /**
-     * Creates a new Pengda model.
+     * Creates a new JenisLap model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Pengda();
+        $model = new JenisLap();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,7 +75,7 @@ class PengdaController extends Controller
     }
 
     /**
-     * Updates an existing Pengda model.
+     * Updates an existing JenisLap model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -94,7 +94,7 @@ class PengdaController extends Controller
     }
 
     /**
-     * Deletes an existing Pengda model.
+     * Deletes an existing JenisLap model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -107,15 +107,15 @@ class PengdaController extends Controller
     }
 
     /**
-     * Finds the Pengda model based on its primary key value.
+     * Finds the JenisLap model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Pengda the loaded model
+     * @return JenisLap the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Pengda::findOne($id)) !== null) {
+        if (($model = JenisLap::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -18,6 +18,7 @@ use Yii;
  * @property integer $kelurahan_id
  * @property string $group
  * @property string $npwp
+ * @property integer $pengda_id
  *
  * @property AktaBadan[] $aktaBadans
  * @property AktaBadanJenisProses[] $aktaBadanJenisProses
@@ -35,6 +36,7 @@ use Yii;
  * @property SuratBawahTangan[] $suratBawahTangans
  * @property SuratSifat[] $suratSifats
  * @property User[] $users
+ * @property Pengda $pengda
  */
 class Notaris extends \yii\db\ActiveRecord
 {
@@ -60,6 +62,7 @@ class Notaris extends \yii\db\ActiveRecord
             [['nama', 'email', 'alamat'], 'string', 'max' => 100],
             [['telepon', 'rt', 'rw', 'dusun', 'group', 'npwp'], 'string', 'max' => 45],
             [['kelurahan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Kelurahan::className(), 'targetAttribute' => ['kelurahan_id' => 'id']],
+            [['pengda_id'], 'exist', 'skipOnError' => true, 'targetClass' => Pengda::className(), 'targetAttribute' => ['pengda_id' => 'id']],
         ];
     }
 
@@ -80,6 +83,7 @@ class Notaris extends \yii\db\ActiveRecord
             'kelurahan_id' => 'Kelurahan ID',
             'group' => 'Group',
             'npwp' => 'Npwp',
+            'pengda_id' => 'Pengda ID',
         ];
     }
 
@@ -209,5 +213,13 @@ class Notaris extends \yii\db\ActiveRecord
     public function getUsers()
     {
         return $this->hasMany(User::className(), ['notaris_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPengda()
+    {
+        return $this->hasOne(Pengda::className(), ['id' => 'pengda_id']);
     }
 }

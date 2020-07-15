@@ -10,9 +10,6 @@ use Yii;
  * @property integer $id_pengda
  * @property integer $id_jenis_lap
  * @property string $format
- *
- * @property Pengda $idPengda
- * @property JenisLap $idJenisLap
  */
 class PengdaLap extends \yii\db\ActiveRecord
 {
@@ -33,8 +30,6 @@ class PengdaLap extends \yii\db\ActiveRecord
             [['id_pengda', 'id_jenis_lap', 'format'], 'required'],
             [['id_pengda', 'id_jenis_lap'], 'integer'],
             [['format'], 'string', 'max' => 100],
-            [['id_pengda'], 'exist', 'skipOnError' => true, 'targetClass' => Pengda::className(), 'targetAttribute' => ['id_pengda' => 'id']],
-            [['id_jenis_lap'], 'exist', 'skipOnError' => true, 'targetClass' => JenisLap::className(), 'targetAttribute' => ['id_jenis_lap' => 'id']],
         ];
     }
 
@@ -48,21 +43,5 @@ class PengdaLap extends \yii\db\ActiveRecord
             'id_jenis_lap' => 'Id Jenis Lap',
             'format' => 'Format',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getIdPengda()
-    {
-        return $this->hasOne(Pengda::className(), ['id' => 'id_pengda']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getIdJenisLap()
-    {
-        return $this->hasOne(JenisLap::className(), ['id' => 'id_jenis_lap']);
     }
 }

@@ -395,15 +395,14 @@ class AktaPpatController extends Controller
 
         // $model = new AktaPpat();
         if ($tglawal==null&&$tglakhir==null) {
-            $model = new AktaPpat;
-            $dataAktaPpat = AktaPpat::find()
-            ->where(['between','tanggal', '000-00-00', '000-00-00'])
+            $ppat = new AktaPpat;
+            $model = AktaPpat::find()
             ->all();
         }else{  
-           $dataAktaPpat = AktaPpat::find()
+           $model = AktaPpat::find()
             ->where(['between','tanggal', $tglawal, $tglakhir])
             ->all();
         }
-        return $this->render('laporan', compact('model', 'dataAktaPpat'));
+        return $this->render('laporan', compact('ppat', 'model'));
     }
 }

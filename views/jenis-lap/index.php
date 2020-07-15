@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\PengdaSearch */
+/* @var $searchModel app\models\JenisLapSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Pengawas Daerah';
+$this->title = 'Jenis Laporan';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="pengda-index">
+<div class="jenis-lap-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Pengda', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Jenis Lap', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,8 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+            'id',
             'nama',
-            'kabupatenName',
+            'format',
+            'pengda_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

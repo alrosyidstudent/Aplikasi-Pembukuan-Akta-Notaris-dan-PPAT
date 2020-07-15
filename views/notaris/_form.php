@@ -83,6 +83,9 @@ use kartik\widgets\Select2;
             <?= $form->field($model, 'dusun')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
+    <?= $form->field($model, 'pengda_id')->widget(Select2::classname(), [
+                'data' => \app\models\Pengda::getOptions(),
+            ]); ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
